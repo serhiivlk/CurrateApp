@@ -2,7 +2,6 @@ package com.serhiiv.test.currate.ui.main;
 
 import android.os.Bundle;
 
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.serhiiv.test.currate.R;
 import com.serhiiv.test.currate.core.base.BaseActivity;
 import com.serhiiv.test.currate.ui.info.InfoActivity;
@@ -26,8 +25,7 @@ public class MainActivity extends BaseActivity {
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        FloatingActionButton fab = findViewById(R.id.fab);
-        fab.setOnClickListener(view -> viewModel.prepareInfo());
+        findViewById(R.id.info_button).setOnClickListener(view -> viewModel.prepareInfo());
 
         if (getSupportFragmentManager().findFragmentById(R.id.fragment_container) == null) {
             getSupportFragmentManager().beginTransaction()
