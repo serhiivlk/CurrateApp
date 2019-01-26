@@ -5,10 +5,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
-
-import com.serhiiv.test.currate.R;
-import com.serhiiv.test.currate.core.base.BaseFragment;
-
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.recyclerview.widget.RecyclerView;
@@ -16,6 +12,11 @@ import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
+import com.serhiiv.test.currate.R;
+import com.serhiiv.test.currate.core.base.BaseFragment;
+import com.serhiiv.test.currate.ui.main.viewmodel.MainViewModel;
+
+import javax.inject.Inject;
 
 public class MainFragment extends BaseFragment {
 
@@ -26,6 +27,10 @@ public class MainFragment extends BaseFragment {
 
     private Unbinder unbinder;
 
+    @Inject
+    MainViewModel viewModel;
+
+    @Inject
     public MainFragment() {
     }
 

@@ -1,15 +1,21 @@
 package com.serhiiv.test.currate.ui.main;
 
 import android.os.Bundle;
-
+import androidx.appcompat.widget.Toolbar;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
 import com.serhiiv.test.currate.R;
 import com.serhiiv.test.currate.core.base.BaseActivity;
+import com.serhiiv.test.currate.ui.main.viewmodel.MainViewModel;
 
-import androidx.appcompat.widget.Toolbar;
+import javax.inject.Inject;
 
 public class MainActivity extends BaseActivity {
+
+    @Inject
+    MainFragment injectedFragment;
+    @Inject
+    MainViewModel viewModel;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -22,9 +28,9 @@ public class MainActivity extends BaseActivity {
         fab.setOnClickListener(view -> Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
                 .setAction("Action", null).show());
 
-        if (savedInstanceState == null) {
+        if (getSupportFragmentManager().findFragmentById(R.id.fragment_container) == null) {
             getSupportFragmentManager().beginTransaction()
-                    .replace(R.id.fragment_container, new MainFragment())
+                    .replace(R.id.fragment_container, injectedFragment)
                     .commit();
         }
     }

@@ -1,6 +1,6 @@
 package com.serhiiv.test.currate.core.base;
 
-import androidx.fragment.app.Fragment;
+import dagger.android.support.DaggerFragment;
 
-public abstract class BaseFragment extends Fragment {
+public abstract class BaseFragment extends DaggerFragment {
 }

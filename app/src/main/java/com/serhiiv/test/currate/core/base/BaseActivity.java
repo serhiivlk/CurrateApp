@@ -1,6 +1,6 @@
 package com.serhiiv.test.currate.core.base;
 
-import androidx.appcompat.app.AppCompatActivity;
+import dagger.android.support.DaggerAppCompatActivity;
 
-abstract public class BaseActivity extends AppCompatActivity {
+abstract public class BaseActivity extends DaggerAppCompatActivity {
 }
