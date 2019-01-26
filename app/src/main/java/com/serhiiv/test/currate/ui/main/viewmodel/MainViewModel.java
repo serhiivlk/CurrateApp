@@ -7,6 +7,7 @@ import com.serhiiv.test.currate.core.entity.CurrencyPair;
 import com.serhiiv.test.currate.core.interactor.CurrencyInteractor;
 import com.serhiiv.test.currate.core.tools.SingleLiveEvent;
 
+import java.util.Collections;
 import java.util.List;
 import java.util.Set;
 
@@ -25,6 +26,7 @@ public class MainViewModel extends BaseViewModel {
     private final MutableLiveData<Boolean> empty = new MutableLiveData<>();
     private final SingleLiveEvent<Void> showInfo = new SingleLiveEvent<>();
 
+    private Set<CurrencyPair> cashedCheckedPairs = Collections.emptySet();
 
     public MainViewModel(CurrencyInteractor currencyInteractor) {
         this.currencyInteractor = currencyInteractor;
@@ -47,6 +49,7 @@ public class MainViewModel extends BaseViewModel {
     }
 
     public void checkedPairs(Set<CurrencyPair> checkedPairs) {
+        cashedCheckedPairs = checkedPairs;
         currencyInteractor.checkedPairs(checkedPairs);
     }
 
@@ -72,6 +75,10 @@ public class MainViewModel extends BaseViewModel {
 
     public LiveData<Void> showInfo() {
         return showInfo;
+    }
+
+    public Set<CurrencyPair> getCheckedPairs() {
+        return cashedCheckedPairs;
     }
 
     private void processingData(List<CurrencyPair> pairs) {

@@ -37,8 +37,9 @@ public class CurrencyPairAdapter extends ListAdapter<CurrencyPair, CurrencyPairA
     @NonNull
     private final OnPairsCheckedChangeListener changeListener;
 
-    public CurrencyPairAdapter(@NonNull OnPairsCheckedChangeListener changeListener) {
+    public CurrencyPairAdapter(Set<CurrencyPair> checkedPairs, @NonNull OnPairsCheckedChangeListener changeListener) {
         super(DIFF_CALLBACK);
+        this.checkedPairs.addAll(checkedPairs);
         this.changeListener = changeListener;
     }
 

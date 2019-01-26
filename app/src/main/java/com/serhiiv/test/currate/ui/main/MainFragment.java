@@ -46,8 +46,7 @@ public class MainFragment extends BaseFragment {
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        recyclerAdapter = new CurrencyPairAdapter(checkedPairs ->
-                viewModel.checkedPairs(checkedPairs));
+        recyclerAdapter = new CurrencyPairAdapter(viewModel.getCheckedPairs(), viewModel::checkedPairs);
     }
 
     @Override
