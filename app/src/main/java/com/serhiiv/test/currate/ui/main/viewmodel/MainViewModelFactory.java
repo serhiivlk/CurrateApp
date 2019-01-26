@@ -1,24 +1,25 @@
 package com.serhiiv.test.currate.ui.main.viewmodel;
 
-import androidx.annotation.NonNull;
-import androidx.lifecycle.ViewModel;
-import androidx.lifecycle.ViewModelProvider;
-import com.serhiiv.test.currate.core.repository.CurrencyRepository;
+import com.serhiiv.test.currate.core.interactor.CurrencyInteractor;
 
 import javax.inject.Inject;
 
+import androidx.annotation.NonNull;
+import androidx.lifecycle.ViewModel;
+import androidx.lifecycle.ViewModelProvider;
+
 public class MainViewModelFactory implements ViewModelProvider.Factory {
-    private final CurrencyRepository currencyRepository;
+    private final CurrencyInteractor currencyInteractor;
 
     @Inject
-    public MainViewModelFactory(CurrencyRepository currencyRepository) {
-        this.currencyRepository = currencyRepository;
+    public MainViewModelFactory(CurrencyInteractor currencyInteractor) {
+        this.currencyInteractor = currencyInteractor;
     }
 
     @NonNull
     @Override
     public <T extends ViewModel> T create(@NonNull Class<T> modelClass) {
         //noinspection unchecked
-        return (T) new MainViewModel(currencyRepository);
+        return (T) new MainViewModel(currencyInteractor);
     }
 }

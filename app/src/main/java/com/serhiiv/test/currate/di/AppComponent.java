@@ -1,9 +1,11 @@
 package com.serhiiv.test.currate.di;
 
 import android.app.Application;
+
 import com.serhiiv.test.currate.BaseApplication;
-import com.serhiiv.test.currate.core.repository.CurrencyRepository;
+import com.serhiiv.test.currate.core.interactor.CurrencyInteractor;
 import com.serhiiv.test.currate.di.scope.PerApplication;
+
 import dagger.BindsInstance;
 import dagger.Component;
 import dagger.android.AndroidInjector;
@@ -17,7 +19,7 @@ import dagger.android.support.AndroidSupportInjectionModule;
 })
 public interface AppComponent extends AndroidInjector<BaseApplication> {
 
-    CurrencyRepository currencyRepository();
+    CurrencyInteractor currencyInteractor();
 
     @Component.Builder
     interface Builder {

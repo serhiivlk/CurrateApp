@@ -10,6 +10,10 @@ public class CurrencyPair {
         this.pair = pair;
     }
 
+    public String getPair() {
+        return pair;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

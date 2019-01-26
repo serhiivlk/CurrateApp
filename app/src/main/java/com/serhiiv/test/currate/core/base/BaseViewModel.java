@@ -2,6 +2,7 @@ package com.serhiiv.test.currate.core.base;
 
 import com.serhiiv.test.currate.core.tools.SingleLiveEvent;
 
+import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 import io.reactivex.disposables.CompositeDisposable;
@@ -18,6 +19,10 @@ public abstract class BaseViewModel extends ViewModel {
 
     protected void track(Disposable disposable) {
         this.disposable.add(disposable);
+    }
+
+    public LiveData<String> getMessage() {
+        return toastMessage;
     }
 
     @Override
