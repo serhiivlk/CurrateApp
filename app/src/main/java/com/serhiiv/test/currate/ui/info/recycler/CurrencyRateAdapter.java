@@ -58,7 +58,7 @@ public class CurrencyRateAdapter extends ListAdapter<CurrencyRate, CurrencyRateA
         }
 
         void bind(CurrencyRate item) {
-            pairNameTextView.setText(item.getPair());
+            pairNameTextView.setText(item.getPair().toString());
             pairRateTextView.setText(String.valueOf(item.getRate()));
         }
     }

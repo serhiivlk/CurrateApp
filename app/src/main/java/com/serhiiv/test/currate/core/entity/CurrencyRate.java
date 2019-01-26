@@ -1,15 +1,15 @@
 package com.serhiiv.test.currate.core.entity;
 
 public class CurrencyRate {
-    private String pair;
+    private CurrencyPair pair;
     private double rate;
 
-    public CurrencyRate(String pair, double rate) {
+    public CurrencyRate(CurrencyPair pair, double rate) {
         this.pair = pair;
         this.rate = rate;
     }
 
-    public String getPair() {
+    public CurrencyPair getPair() {
         return pair;
     }
 

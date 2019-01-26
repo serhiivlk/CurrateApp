@@ -67,7 +67,7 @@ public class CurrencyInteractorImpl implements CurrencyInteractor {
         List<CurrencyRate> rates = new ArrayList<>(map.size());
         for (String key : map.keySet()) {
             //noinspection ConstantConditions
-            rates.add(new CurrencyRate(key, Double.parseDouble(map.get(key))));
+            rates.add(new CurrencyRate(new CurrencyPair(key), Double.parseDouble(map.get(key))));
         }
         return rates;
     }
