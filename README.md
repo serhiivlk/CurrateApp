@@ -1,0 +1,2 @@
+# CurrateApp
+Currency rates
