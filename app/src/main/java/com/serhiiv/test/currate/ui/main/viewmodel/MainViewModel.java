@@ -8,6 +8,7 @@ import com.serhiiv.test.currate.core.interactor.CurrencyInteractor;
 import com.serhiiv.test.currate.core.tools.SingleLiveEvent;
 
 import java.util.List;
+import java.util.Set;
 
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
@@ -43,6 +44,18 @@ public class MainViewModel extends BaseViewModel {
                 .doOnComplete(() -> loading.setValue(false))
                 .doOnError(error -> loading.setValue(false))
                 .subscribe(this::processingData, this::processingError));
+    }
+
+    public void checkedPairs(Set<CurrencyPair> checkedPairs) {
+        currencyInteractor.checkedPairs(checkedPairs);
+    }
+
+    public void prepareInfo() {
+        if (currencyInteractor.isAnyChecked()) {
+            showInfo.call();
+        } else {
+            showToastMessage("No pairs checked");
+        }
     }
 
     public LiveData<Boolean> isLoading() {

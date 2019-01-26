@@ -3,12 +3,16 @@ package com.serhiiv.test.currate.ui.main.recycler;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.CheckBox;
 import android.widget.TextView;
 
 import com.serhiiv.test.currate.R;
 import com.serhiiv.test.currate.core.entity.CurrencyPair;
 
+import java.util.Set;
+
 import androidx.annotation.NonNull;
+import androidx.collection.ArraySet;
 import androidx.recyclerview.widget.DiffUtil;
 import androidx.recyclerview.widget.ListAdapter;
 import androidx.recyclerview.widget.RecyclerView;
@@ -28,8 +32,14 @@ public class CurrencyPairAdapter extends ListAdapter<CurrencyPair, CurrencyPairA
         }
     };
 
-    public CurrencyPairAdapter() {
+    private final Set<CurrencyPair> checkedPairs = new ArraySet<>();
+
+    @NonNull
+    private final OnPairsCheckedChangeListener changeListener;
+
+    public CurrencyPairAdapter(@NonNull OnPairsCheckedChangeListener changeListener) {
         super(DIFF_CALLBACK);
+        this.changeListener = changeListener;
     }
 
     @NonNull
@@ -42,20 +52,38 @@ public class CurrencyPairAdapter extends ListAdapter<CurrencyPair, CurrencyPairA
 
     @Override
     public void onBindViewHolder(@NonNull CurrencyPairViewHolder holder, int position) {
-        holder.bind(getItem(position));
+        CurrencyPair item = getItem(position);
+        holder.bind(item, checkedPairs.contains(item));
+    }
+
+    public interface OnPairsCheckedChangeListener {
+        void onChange(Set<CurrencyPair> checkedPairs);
     }
 
     class CurrencyPairViewHolder extends RecyclerView.ViewHolder {
         @BindView(R.id.pair_name)
         TextView nameTextView;
+        @BindView(R.id.pair_check_box)
+        CheckBox checkBox;
 
-        public CurrencyPairViewHolder(@NonNull View itemView) {
+        CurrencyPairViewHolder(@NonNull View itemView) {
             super(itemView);
             ButterKnife.bind(this, itemView);
         }
 
-        void bind(CurrencyPair pair) {
+        void bind(CurrencyPair pair, boolean isChecked) {
             nameTextView.setText(pair.toString());
+            checkBox.setChecked(isChecked);
+
+            itemView.setOnClickListener(v -> {
+                if (checkedPairs.contains(pair)) {
+                    checkedPairs.remove(pair);
+                } else {
+                    checkedPairs.add(pair);
+                }
+                notifyItemChanged(getAdapterPosition());
+            });
+            changeListener.onChange(checkedPairs);
         }
     }
 }
