@@ -41,6 +41,7 @@ public class MainViewModel extends BaseViewModel {
                     loading.setValue(true);
                 })
                 .doOnComplete(() -> loading.setValue(false))
+                .doOnError(error -> loading.setValue(false))
                 .subscribe(this::processingData, this::processingError));
     }
 
@@ -67,5 +68,6 @@ public class MainViewModel extends BaseViewModel {
 
     private void processingError(Throwable error) {
         Log.e(TAG, "Load currency pairs error", error);
+        showToastMessage("Error");
     }
 }
