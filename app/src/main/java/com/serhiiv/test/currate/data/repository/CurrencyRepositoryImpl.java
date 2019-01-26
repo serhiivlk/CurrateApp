@@ -29,6 +29,19 @@ public class CurrencyRepositoryImpl implements CurrencyRepository {
 
     @Override
     public Observable<Map<String, String>> getRates(List<String> pairs) {
-        return null;
+        return service.currencyRates(joinPairs(pairs))
+                .map(BaseResponse::getData)
+                .toObservable();
+    }
+
+    private String joinPairs(List<String> pairs) {
+        StringBuilder builder = new StringBuilder();
+        for (int i = 0; i < pairs.size(); i++) {
+            builder.append(pairs.get(i));
+            if (i < pairs.size() - 1) {
+                builder.append(',');
+            }
+        }
+        return builder.toString();
     }
 }

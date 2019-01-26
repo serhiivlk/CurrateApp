@@ -5,6 +5,7 @@ import android.os.Bundle;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.serhiiv.test.currate.R;
 import com.serhiiv.test.currate.core.base.BaseActivity;
+import com.serhiiv.test.currate.ui.info.InfoActivity;
 import com.serhiiv.test.currate.ui.main.viewmodel.MainViewModel;
 
 import javax.inject.Inject;
@@ -35,7 +36,7 @@ public class MainActivity extends BaseActivity {
         }
 
         viewModel.showInfo().observe(this, aVoid -> {
-            // todo go to info
+            startActivity(InfoActivity.startIntent(this));
         });
     }
 

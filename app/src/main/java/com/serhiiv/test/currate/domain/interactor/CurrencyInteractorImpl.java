@@ -1,11 +1,14 @@
 package com.serhiiv.test.currate.domain.interactor;
 
 import com.serhiiv.test.currate.core.entity.CurrencyPair;
+import com.serhiiv.test.currate.core.entity.CurrencyRate;
 import com.serhiiv.test.currate.core.interactor.CurrencyInteractor;
 import com.serhiiv.test.currate.core.repository.CurrencyRepository;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 
 import javax.inject.Inject;
@@ -50,5 +53,22 @@ public class CurrencyInteractorImpl implements CurrencyInteractor {
     @Override
     public boolean isAnyChecked() {
         return !checkedPairs.isEmpty();
+    }
+
+    @Override
+    public Observable<List<CurrencyRate>> getRateForCheckedPairs() {
+        return currencyRepository.getRates(new ArrayList<>(checkedPairs))
+                .map(this::mapRates)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread());
+    }
+
+    private List<CurrencyRate> mapRates(Map<String, String> map) {
+        List<CurrencyRate> rates = new ArrayList<>(map.size());
+        for (String key : map.keySet()) {
+            //noinspection ConstantConditions
+            rates.add(new CurrencyRate(key, Double.parseDouble(map.get(key))));
+        }
+        return rates;
     }
 }

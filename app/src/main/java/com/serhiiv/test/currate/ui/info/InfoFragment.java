@@ -1,4 +1,4 @@
-package com.serhiiv.test.currate.ui.main;
+package com.serhiiv.test.currate.ui.info;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -8,8 +8,8 @@ import android.widget.Toast;
 
 import com.serhiiv.test.currate.R;
 import com.serhiiv.test.currate.core.base.BaseFragment;
-import com.serhiiv.test.currate.ui.main.recycler.CurrencyPairAdapter;
-import com.serhiiv.test.currate.ui.main.viewmodel.MainViewModel;
+import com.serhiiv.test.currate.ui.info.recycler.CurrencyRateAdapter;
+import com.serhiiv.test.currate.ui.info.viewmodel.InfoViewModel;
 
 import javax.inject.Inject;
 
@@ -22,7 +22,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
 
-public class MainFragment extends BaseFragment {
+public class InfoFragment extends BaseFragment {
 
     @BindView(R.id.swipe_refresh)
     SwipeRefreshLayout swipeRefreshLayout;
@@ -30,30 +30,26 @@ public class MainFragment extends BaseFragment {
     RecyclerView recycler;
     @BindView(R.id.empty_view)
     View emptyView;
-
+    @Inject
+    InfoViewModel viewModel;
     private Unbinder unbinder;
-
-    private CurrencyPairAdapter recyclerAdapter;
-
-    @Inject
-    MainViewModel viewModel;
+    private CurrencyRateAdapter recyclerAdapter;
 
     @Inject
-    public MainFragment() {
+    public InfoFragment() {
     }
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        recyclerAdapter = new CurrencyPairAdapter(checkedPairs ->
-                viewModel.checkedPairs(checkedPairs));
+        recyclerAdapter = new CurrencyRateAdapter();
     }
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_main, container, false);
+        View view = inflater.inflate(R.layout.fragment_info, container, false);
         unbinder = ButterKnife.bind(this, view);
         return view;
     }
@@ -66,19 +62,18 @@ public class MainFragment extends BaseFragment {
         recycler.setHasFixedSize(true);
         recycler.setAdapter(recyclerAdapter);
 
-        swipeRefreshLayout.setOnRefreshListener(() -> viewModel.loadCurrencyPairs());
+        swipeRefreshLayout.setOnRefreshListener(viewModel::loadCurrencyRates);
 
         subscribeViewModel();
     }
 
     private void subscribeViewModel() {
-        viewModel.isLoading().observe(this, isLoading ->
-                swipeRefreshLayout.setRefreshing(isLoading));
-        viewModel.getPairs().observe(this, pairs -> recyclerAdapter.submitList(pairs));
+        viewModel.isLoading().observe(this, swipeRefreshLayout::setRefreshing);
         viewModel.isEmpty().observe(this, isEmpty ->
                 emptyView.setVisibility(isEmpty ? View.VISIBLE : View.GONE));
-        viewModel.getMessage().observe(this, s ->
-                Toast.makeText(getContext(), s, Toast.LENGTH_SHORT).show());
+        viewModel.getRates().observe(this, recyclerAdapter::submitList);
+        viewModel.getMessage().observe(this, message ->
+                Toast.makeText(getContext(), message, Toast.LENGTH_SHORT).show());
     }
 
     @Override
