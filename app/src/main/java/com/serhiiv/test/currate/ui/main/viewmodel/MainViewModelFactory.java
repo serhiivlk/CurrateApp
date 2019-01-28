@@ -1,12 +1,13 @@
 package com.serhiiv.test.currate.ui.main.viewmodel;
 
+import android.arch.lifecycle.ViewModel;
+import android.arch.lifecycle.ViewModelProvider;
+import android.support.annotation.NonNull;
+
 import com.serhiiv.test.currate.core.interactor.CurrencyInteractor;
 
 import javax.inject.Inject;
 
-import androidx.annotation.NonNull;
-import androidx.lifecycle.ViewModel;
-import androidx.lifecycle.ViewModelProvider;
 
 public class MainViewModelFactory implements ViewModelProvider.Factory {
     private final CurrencyInteractor currencyInteractor;

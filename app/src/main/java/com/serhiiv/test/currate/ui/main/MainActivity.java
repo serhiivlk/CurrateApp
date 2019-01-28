@@ -1,6 +1,7 @@
 package com.serhiiv.test.currate.ui.main;
 
 import android.os.Bundle;
+import android.support.v7.widget.Toolbar;
 
 import com.serhiiv.test.currate.R;
 import com.serhiiv.test.currate.core.base.BaseActivity;
@@ -9,7 +10,6 @@ import com.serhiiv.test.currate.ui.main.viewmodel.MainViewModel;
 
 import javax.inject.Inject;
 
-import androidx.appcompat.widget.Toolbar;
 
 public class MainActivity extends BaseActivity {
 
@@ -22,7 +22,7 @@ public class MainActivity extends BaseActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        Toolbar toolbar = findViewById(R.id.toolbar);
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
         findViewById(R.id.info_button).setOnClickListener(view -> viewModel.prepareInfo());

@@ -1,5 +1,8 @@
 package com.serhiiv.test.currate.domain.interactor;
 
+import android.support.annotation.NonNull;
+import android.support.v4.util.ArraySet;
+
 import com.serhiiv.test.currate.core.entity.CurrencyPair;
 import com.serhiiv.test.currate.core.entity.CurrencyRate;
 import com.serhiiv.test.currate.core.interactor.CurrencyInteractor;
@@ -13,8 +16,6 @@ import java.util.Set;
 
 import javax.inject.Inject;
 
-import androidx.annotation.NonNull;
-import androidx.collection.ArraySet;
 import io.reactivex.Observable;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.schedulers.Schedulers;
@@ -35,7 +36,7 @@ public class CurrencyInteractorImpl implements CurrencyInteractor {
         return currencyRepository.getCurrencyPairs()
                 .flatMapIterable(strings -> strings)
                 .map(CurrencyPair::new)
-                .toList()
+                .toSortedList((o1, o2) -> o2.getPair().compareToIgnoreCase(o1.getPair()))
                 .toObservable()
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread());

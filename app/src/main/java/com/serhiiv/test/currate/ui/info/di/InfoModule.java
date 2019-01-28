@@ -1,13 +1,14 @@
 package com.serhiiv.test.currate.ui.info.di;
 
+import android.arch.lifecycle.ViewModelProviders;
+
 import com.serhiiv.test.currate.di.scope.PerActivity;
 import com.serhiiv.test.currate.di.scope.PerFragment;
 import com.serhiiv.test.currate.ui.info.InfoActivity;
 import com.serhiiv.test.currate.ui.info.InfoFragment;
 import com.serhiiv.test.currate.ui.info.viewmodel.InfoViewModel;
-import com.serhiiv.test.currate.ui.info.viewmodel.InfuViewModelFactory;
+import com.serhiiv.test.currate.ui.info.viewmodel.InfoViewModelFactory;
 
-import androidx.lifecycle.ViewModelProviders;
 import dagger.Module;
 import dagger.Provides;
 import dagger.android.ContributesAndroidInjector;
@@ -16,7 +17,7 @@ import dagger.android.ContributesAndroidInjector;
 public abstract class InfoModule {
     @Provides
     @PerActivity
-    static InfoViewModel provideInfoViewModel(InfoActivity activity, InfuViewModelFactory factory) {
+    static InfoViewModel provideInfoViewModel(InfoActivity activity, InfoViewModelFactory factory) {
         return ViewModelProviders.of(activity, factory).get(InfoViewModel.class);
     }
 

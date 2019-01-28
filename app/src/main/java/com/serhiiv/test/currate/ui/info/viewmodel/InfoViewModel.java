@@ -1,5 +1,7 @@
 package com.serhiiv.test.currate.ui.info.viewmodel;
 
+import android.arch.lifecycle.LiveData;
+import android.arch.lifecycle.MutableLiveData;
 import android.util.Log;
 
 import com.serhiiv.test.currate.core.base.BaseViewModel;
@@ -8,8 +10,6 @@ import com.serhiiv.test.currate.core.interactor.CurrencyInteractor;
 
 import java.util.List;
 
-import androidx.lifecycle.LiveData;
-import androidx.lifecycle.MutableLiveData;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.schedulers.Schedulers;
 

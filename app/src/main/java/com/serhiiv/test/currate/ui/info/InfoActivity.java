@@ -3,15 +3,14 @@ package com.serhiiv.test.currate.ui.info;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v7.app.ActionBar;
+import android.support.v7.widget.Toolbar;
 
 import com.serhiiv.test.currate.R;
 import com.serhiiv.test.currate.core.base.BaseActivity;
 import com.serhiiv.test.currate.ui.info.viewmodel.InfoViewModel;
 
 import javax.inject.Inject;
-
-import androidx.appcompat.app.ActionBar;
-import androidx.appcompat.widget.Toolbar;
 
 public class InfoActivity extends BaseActivity {
 

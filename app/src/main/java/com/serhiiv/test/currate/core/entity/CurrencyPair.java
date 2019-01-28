@@ -1,6 +1,6 @@
 package com.serhiiv.test.currate.core.entity;
 
-import androidx.annotation.NonNull;
+import android.support.annotation.NonNull;
 
 public class CurrencyPair {
 
